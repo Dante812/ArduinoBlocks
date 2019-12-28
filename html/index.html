@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="">
+                        <div class="form-row">
+                            <!-- Вибір типу даних -->
+                            <div class="form-group col-md-2">
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose Type</option>
+                                    <option>INT</option>
+                                    <option>DOUBLE</option>
+                                    <option>STRING</option>
+                                    <option>BOOLEAN</option>
+                                </select>
+                            </div>
+                            <!-- Вибір піна -->
+                            <div class="form-group col-md-2">
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose PIN</option>
+                                    <option>D0</option>
+                                    <option>D1</option>
+                                    <option>D2</option>
+                                    <option>D3</option>
+                                    <option>D4</option>
+                                    <option>D5</option>
+                                    <option>D6</option>
+                                    <option>D7</option>
+                                    <option>D8</option>
+                                    <option>D9</option>
+                                    <option>D10</option>
+                                    <option>D11</option>
+                                    <option>D12</option>
+                                    <option>D13</option>
+                                    <option>A0</option>
+                                    <option>A1</option>
+                                    <option>A2</option>
+                                    <option>A3</option>
+                                    <option>A4</option>
+                                    <option>A5</option>
+                                </select>
+                            </div>
+                            <!-- тут буде ввід імені змінної -->
+                            <div class="form-group col-md-3">
+                                <input type="text" class="form-control" value="Value Name" name="valueName">
+                            </div>
+                            <!-- тут знаходяться радіо кнопки для вибору INPUT OUTPUT -->
+                            <div class="form-group col-md-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                    INPUT
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                    OUTPUT
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- кнопка додати -->
+                            <button type="submit" class="btn btn-primary col-md-2">ADD</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- my JavaScript -->
+        <script src="../js/script.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>

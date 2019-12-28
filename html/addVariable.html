@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- тут контейнер в якому будуть розміщатись створені змінні -->
+                    <div class="col-md-12" id="containerForVariables"></div>
+                    <!-- тут форма для створення змінних -->
+                    <div class="row">
+                        <!-- селектор -->
+                        <div class="form-group col-md-3">
+                            <select id="inputTypeVariable" class="form-control">
+                                <option selected value="nonType">Choose Type</option>
+                                <option value="int">INT</option>
+                                <option value="double">DOUBLE</option>
+                                <option value="string">STRING</option>
+                                <option value="boolean">BOOLEAN</option>
+                            </select>
+                        </div>
+                        <!-- кінець селектору -->
+
+                        <!-- текстове поле для введення імені -->
+                        <div class="form-group col-md-3">
+                            <input required type="text" class="form-control" id="inputVariableName" placeholder="Name">
+                        </div>
+                        <!-- кінець текстового поля -->
+                        
+                        <!-- текстове поле для введення значення -->
+                        <div class="form-group col-md-3">
+                            <input required type="text" class="form-control" id="inputVariableValue" placeholder="Value">
+                        </div>
+                        <!-- кінець текстового поля -->
+
+                        <!-- кнопка додати -->
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-primary" onclick="addVariable()">ADD</button>
+                        </div>
+                        <!-- кінець кнопки -->
+                    </div>
+                    <!-- кінець форми для створення змінних -->
+
+                    <!-- тут кнопка для генерування і відправлення коду на обробку -->
+                    <div class="row">
+                        <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
+                    </div>
+                    <!-- кінець кнопки -->
+
+                    <!-- тут буде розміщений той код який буде відправлено на сервер (для дебагу) -->
+                    <div class="row" id="code"></div>
+                </div>
+            </div>
+        </div>
+        <!-- підключення мого скріпта -->
+        <script src="../js/script.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
