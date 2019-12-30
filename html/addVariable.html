@@ -18,6 +18,7 @@
 
                     <!-- тут форма для створення змінних -->
                     <div class="row">
+
                         <!-- селектор -->
                         <div class="form-group col-md-3">
                             <select id="inputTypeVariable" class="form-control">
@@ -31,25 +32,91 @@
                         <!-- кінець селектору -->
 
                         <!-- текстове поле для введення імені -->
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <input required type="text" class="form-control" id="inputVariableName" placeholder="Name">
                         </div>
                         <!-- кінець текстового поля -->
                         
                         <!-- текстове поле для введення значення -->
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <input required type="text" class="form-control" id="inputVariableValue" placeholder="Value">
                         </div>
                         <!-- кінець текстового поля -->
 
                         <!-- кнопка додати -->
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-1">
                             <button class="btn btn-primary" onclick="handler.addVariable()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
                     </div>
                     <!-- кінець форми для створення змінних -->
 
+                    <!-- тут буде контейнер для створення елементів -->
+                    <div class="col-md-12" id="containerForVariables"></div>
+
+                    <!-- тут буде форма для довавання елементів -->
+                    <div class="row">
+                        <!-- селектор вибору елементу-->
+                        <div class="form-group col-md-3">
+                            <select id="inputElement" class="form-control">
+                                <option selected value="nonType">Choose Element</option>
+                                <option value="led">LED</option>
+                                <option value="servo">SERVO</option>
+                                <option value="potentiometr">POTENTIOMETR</option>
+                            </select>
+                        </div>
+                        <!-- кінець селектору -->
+
+                        <!-- селектор вибору піна -->
+                        <div class="form-group col-md-2">
+                            <select id="inputPIN" class="form-control">
+                                <option selected value="nonType">Choose PIN</option>
+                                <option value="D0">D0</option>
+                                <option value="D1">D1</option>
+                                <option value="D2">D2</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                <option value="D5">D5</option>
+                                <option value="D6">D6</option>
+                                <option value="D7">D7</option>
+                                <option value="D8">D8</option>
+                                <option value="D9">D9</option>
+                                <option value="D10">D10</option>
+                                <option value="D11">D11</option>
+                                <option value="D12">D12</option>
+                                <option value="D13">D13</option>
+                                <option value="A0">A0</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="A3">A3</option>
+                                <option value="A4">A4</option>
+                                <option value="A5">A5</option>
+                            </select>
+                        </div>
+                        <!-- кінець селектору -->
+
+                        <!-- селектор вибору типу елементу -->
+                        <div class="form-group col-md-3">
+                            <select id="inputElementType" class="form-control">
+                                <option selected value="nonType">Choose Element Type</option>
+                                <option value="INPUT">INPUT</option>
+                                <option value="OUTPUT">OUTPUT</option>
+                            </select>
+                        </div>
+                        <!-- кінець селектору -->
+                        
+                        <!-- текстове поле для введення імені -->
+                        <div class="form-group col-md-3">
+                            <input required type="text" class="form-control" id="inputElementName" placeholder="Name">
+                        </div>
+                        <!-- кінець текстового поля -->
+
+                        <!-- кнопка додати -->
+                        <div class="form-group col-md-1">
+                            <button class="btn btn-primary" onclick="">ADD</button>
+                        </div>
+                        <!-- кінець кнопки -->
+                    </div>
                     <!-- тут кнопка для генерування і відправлення коду на обробку -->
                     <div class="row">
                         <button class="btn btn-success col-md-12" onclick="handler.sendData()">GENNERATE</button>
