@@ -2,10 +2,7 @@
 var elementId = 0;
 // змінна для збереження даних для відправки на сервер
 var data = new Map();
-// змінні для відправки даних на сервер
-var formData = new FormData();
-var request = new XMLHttpRequest();
-request.open("POST", "../server/file.php");
+
 // функція для відправлення даних на обрбку (покищо бета (-_-) )
 function sendData(){
     // очищаємо візуальне поле від попередніх значень
