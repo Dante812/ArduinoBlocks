@@ -45,21 +45,21 @@
 
                         <!-- кнопка додати -->
                         <div class="form-group col-md-1">
-                            <button class="btn btn-primary" onclick="handler.addVariable()">ADD</button>
+                            <button class="btn btn-primary" onclick="handlerValue.addVariable()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
                     </div>
                     <!-- кінець форми для створення змінних -->
 
                     <!-- тут буде контейнер для створення елементів -->
-                    <div class="col-md-12" id="containerForVariables"></div>
+                    <div class="col-md-12" id="containerForElements"></div>
 
                     <!-- тут буде форма для довавання елементів -->
                     <div class="row">
                         <!-- селектор вибору елементу-->
                         <div class="form-group col-md-3">
                             <select id="inputElement" class="form-control">
-                                <option selected value="nonType">Choose Element</option>
+                                <option selected value="nonElement">Choose Element</option>
                                 <option value="led">LED</option>
                                 <option value="servo">SERVO</option>
                                 <option value="potentiometr">POTENTIOMETR</option>
@@ -70,7 +70,7 @@
                         <!-- селектор вибору піна -->
                         <div class="form-group col-md-2">
                             <select id="inputPIN" class="form-control">
-                                <option selected value="nonType">Choose PIN</option>
+                                <option selected value="nonPin">Choose PIN</option>
                                 <option value="D0">D0</option>
                                 <option value="D1">D1</option>
                                 <option value="D2">D2</option>
@@ -113,13 +113,17 @@
 
                         <!-- кнопка додати -->
                         <div class="form-group col-md-1">
-                            <button class="btn btn-primary" onclick="">ADD</button>
+                            <button class="btn btn-primary" onclick="handlerElement.addElement()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
+
                     </div>
                     <!-- тут кнопка для генерування і відправлення коду на обробку -->
                     <div class="row">
-                        <button class="btn btn-success col-md-12" onclick="handler.sendData()">GENNERATE</button>
+                        <form action="../server/file.php" method="POST">
+                            <input type="hidden" name="data" id="sender" value="b">
+                            <button class="btn btn-success col-md-12" type="submit" onclick="sendData()">GENNERATE</button>
+                        </form>
                     </div>
                     <!-- кінець кнопки -->
 
@@ -137,3 +141,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
+
+
+
