@@ -1,22 +1,32 @@
 // змінна для генерування ID елементів на сторінці
 var elementId = 0;
-// змінна для збереження даних для відправки на сервер
+// хеш для збереження перемінних для відправки на сервер
 var data = new Map();
-
+// хеш для збереження елементів для відправки на сервер
+var elementsData = new Map();
 // функція для відправлення даних на обрбку (покищо бета (-_-) )
 function sendData(){
     // очищаємо візуальне поле від попередніх значень
     document.getElementById("code").innerHTML = "";
     //
-    let code = "";
+    let variablesText = "";
+    let elementsText = "";
     // заповнюємо візуальне поле вмістом масиву
     for (let key of data.keys()) {
         document.getElementById("code").insertAdjacentHTML("beforeEnd", key+" -> "+data.get(key) + "<br>");
-        code += data.get(key);
+        variablesText += data.get(key);
+        
     }
+    console.log(variablesText);
+    for (let key of elementsData.keys()) {
+        document.getElementById("code").insertAdjacentHTML("beforeEnd", key+" -> "+elementsData.get(key) + "<br>");
+        elementsText += elementsData.get(key);
+    }
+    console.log(elementsText);
     // поставити всі елементи в перемінну
 
-    document.getElementById("sender").value = code;
+    document.getElementById("senderVariables").value = variablesText;
+    document.getElementById("senderElements").value = elementsText;
 }
 // видалення змінної
 function deleteRow(i){
@@ -71,9 +81,8 @@ class HandlerValue {
 }
 
 class HandlerElement {
-    constructor(elementId, elementPinId, typeElementId, elemetnNameId, containerId){
+    constructor(elementPinId, typeElementId, elemetnNameId, containerId){
         // змінні для збереження id елементів на сторінці
-        this.elementId = elementId;
         this.elementPinId = elementPinId;
         this.typeElementId = typeElementId;
         this.elemetnNameId = elemetnNameId;
@@ -81,7 +90,6 @@ class HandlerElement {
         // отримуємо посилання на елемент в якому будуть розміщені змінні
         this.elementsContainer = document.getElementById(containerId);
         // змінні для збереження значень переданих головною формою
-        this.element = "";
         this.elementPin = "";
         this.typeElement = "";
         this.elementName = "";
@@ -91,18 +99,17 @@ class HandlerElement {
     // функція для добавлення змінної в контейнер
     addElement() {
         // беремо всі значення з головної форми
-        this.element = document.getElementById(this.elementId).value;
         this.elementPin = document.getElementById(this.elementPinId).value;
         this.typeElement = document.getElementById(this.typeElementId).value;
         this.elementName = document.getElementById(this.elemetnNameId).value;
         // перевіряємо чи не пусті поля для вводу
-        if(this.element == "nonElement" || this.elementPin == "nonPin" || this.typeElement == "nonType" || this.elementName == "") {
+        if(this.elementPin == "nonPin" || this.typeElement == "nonType" || this.elementName == "") {
             alert("pls enter all fields");
         }else{
             // створюємо елемент для вставки
-            this.UIelement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputElement' value='"+this.element+"'></div><div class='form-group col-md-2'><input disabled type='text' class='form-control' name='inputPIN' value='"+this.elementPin+"'></div><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputElementType' value='"+this.typeElement+"'></div><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputElementName' value='"+this.elementName+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>"
+            this.UIelement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputPIN' value='"+this.elementPin+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementType' value='"+this.typeElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementName' value='"+this.elementName+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>"
             // записуємо значення в асоціативний масив
-            data.set(elementId,this.element+"_"+this.elementPin+"_"+this.typeElement+"_"+this.elementName+";\n");
+            elementsData.set(elementId,this.elementPin+"_"+this.typeElement+"_"+this.elementName+";\n");
             // вставляємо елемент в кінець контейнеру
             this.elementsContainer.insertAdjacentHTML("beforeEnd", this.UIelement);
             // збільшуємо загальний id 
@@ -111,4 +118,4 @@ class HandlerElement {
     }
 }
 var handlerValue = new HandlerValue("inputTypeVariable", "inputVariableName", "inputVariableValue", "containerForVariables");
-var handlerElement = new HandlerElement("inputElement", "inputPIN", "inputElementType", "inputElementName", "containerForElements");
+var handlerElement = new HandlerElement("inputPIN", "inputElementType", "inputElementName", "containerForElements");

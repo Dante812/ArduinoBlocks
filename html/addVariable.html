@@ -25,7 +25,7 @@
                                 <option selected value="nonType">Choose Type</option>
                                 <option value="int">INT</option>
                                 <option value="double">DOUBLE</option>
-                                <option value="string">STRING</option>
+                                <option value="String">STRING</option>
                                 <option value="boolean">BOOLEAN</option>
                             </select>
                         </div>
@@ -56,35 +56,24 @@
 
                     <!-- тут буде форма для довавання елементів -->
                     <div class="row">
-                        <!-- селектор вибору елементу-->
-                        <div class="form-group col-md-3">
-                            <select id="inputElement" class="form-control">
-                                <option selected value="nonElement">Choose Element</option>
-                                <option value="led">LED</option>
-                                <option value="servo">SERVO</option>
-                                <option value="potentiometr">POTENTIOMETR</option>
-                            </select>
-                        </div>
-                        <!-- кінець селектору -->
-
                         <!-- селектор вибору піна -->
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-3">
                             <select id="inputPIN" class="form-control">
                                 <option selected value="nonPin">Choose PIN</option>
-                                <option value="D0">D0</option>
-                                <option value="D1">D1</option>
-                                <option value="D2">D2</option>
-                                <option value="D3">D3</option>
-                                <option value="D4">D4</option>
-                                <option value="D5">D5</option>
-                                <option value="D6">D6</option>
-                                <option value="D7">D7</option>
-                                <option value="D8">D8</option>
-                                <option value="D9">D9</option>
-                                <option value="D10">D10</option>
-                                <option value="D11">D11</option>
-                                <option value="D12">D12</option>
-                                <option value="D13">D13</option>
+                                <option value="0">D0</option>
+                                <option value="1">D1</option>
+                                <option value="2">D2</option>
+                                <option value="3">D3</option>
+                                <option value="4">D4</option>
+                                <option value="5">D5</option>
+                                <option value="6">D6</option>
+                                <option value="7">D7</option>
+                                <option value="8">D8</option>
+                                <option value="9">D9</option>
+                                <option value="10">D10</option>
+                                <option value="11">D11</option>
+                                <option value="12">D12</option>
+                                <option value="13">D13</option>
                                 <option value="A0">A0</option>
                                 <option value="A1">A1</option>
                                 <option value="A2">A2</option>
@@ -96,7 +85,7 @@
                         <!-- кінець селектору -->
 
                         <!-- селектор вибору типу елементу -->
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <select id="inputElementType" class="form-control">
                                 <option selected value="nonType">Choose Element Type</option>
                                 <option value="INPUT">INPUT</option>
@@ -106,7 +95,7 @@
                         <!-- кінець селектору -->
                         
                         <!-- текстове поле для введення імені -->
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <input required type="text" class="form-control" id="inputElementName" placeholder="Name">
                         </div>
                         <!-- кінець текстового поля -->
@@ -121,9 +110,11 @@
                     <!-- тут кнопка для генерування і відправлення коду на обробку -->
                     <div class="row">
                         <form action="../../../cgi-bin/pro.pl" method="POST">
-                            <input type="hidden" name="data" id="sender" value="b">
-                            <button class="btn btn-success col-md-12" type="submit" onclick="sendData()">GENNERATE</button>
+                            <input type="hidden" name="variables" id="senderVariables" value="">
+                            <input type="hidden" name="elements" id="senderElements" value="">
+                            <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
                         </form>
+                        
                     </div>
                     <!-- кінець кнопки -->
 
