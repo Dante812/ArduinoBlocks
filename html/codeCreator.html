@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>ArduinoBlocks</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,6 +11,34 @@
     </head>
     <body>
         <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <!-- тут буде верхнє меню -->
+                    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+                        <!-- Logo -->
+                        <a class="navbar-brand" href="index.html">Logo</a>
+                        <!-- Links -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Головна</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="codeCreator.html">Створити скрипт</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="manual.html">Інструкція</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="comands.html">Команди</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="examples.html">Приклади</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <br>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 border">
                     <!-- тут контейнер в якому будуть розміщатись створені змінні -->
@@ -24,9 +52,12 @@
                             <select id="inputTypeVariable" class="form-control">
                                 <option selected value="nonType">Choose Type</option>
                                 <option value="int">INT</option>
-                                <option value="double">DOUBLE</option>
-                                <option value="String">STRING</option>
                                 <option value="boolean">BOOLEAN</option>
+                                <option value="String">STRING</option>
+                                <option value="float">FLOAT</option>
+                                <option value="double">DOUBLE</option>
+                                <option value="long">LONG</option>
+                                <option value="char">CHAR</option>
                             </select>
                         </div>
                         <!-- кінець селектору -->
@@ -106,15 +137,24 @@
                         </div>
                         <!-- кінець кнопки -->
 
+                        <!-- тут тестовий селектор -->
+                        <div class="form-group col-md-4">
+                            <select id="test" class="form-control">
+                                
+                            </select>
+                        </div>
+
                     </div>
+                    
                     <!-- тут кнопка для генерування і відправлення коду на обробку -->
                     <div class="row">
-                        <form action="../../../cgi-bin/pro.pl" method="POST">
-                            <input type="hidden" name="variables" id="senderVariables" value="">
-                            <input type="hidden" name="elements" id="senderElements" value="">
-                            <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
-                        </form>
-                        
+                        <div class="col-md-12">
+                            <form action="../../../cgi-bin/pro.pl " method="POST">
+                                <input type="hidden" name="variables" id="senderVariables" value="">
+                                <input type="hidden" name="elements" id="senderElements" value="">
+                                <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
+                            </form>
+                        </div>
                     </div>
                     <!-- кінець кнопки -->
 
@@ -125,6 +165,7 @@
         </div>
         <!-- підключення мого скріпта -->
         <script src="../js/class.js"></script>
+        <script src="../js/test.js"></script>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -34,7 +34,28 @@ function deleteRow(i){
     document.getElementById(i).remove();
     // видаляємо дані з масиву які відповідають візуальному елементу
     data.delete(i);
+    // 
+    deleteOption(i);
 }
+
+// змінна з селектором
+let select = document.getElementById("test");
+// функція для добавлення елементу
+function addOption (select, text, value, id){
+    id += "opt";
+    let option = select.options[select.options.length] = new Option(text, value);
+    option.id = id;
+}
+// функція для видалення елементу зі списку по id
+function deleteOption (idOption) {
+    idOption += "opt";
+    document.getElementById(idOption).remove();
+}
+// функція для очищення списку
+function clearSelect(select) {
+    select.options.length = 0;
+}
+
 // клас для створення і обробки змінних
 class HandlerValue {
     constructor(typeVariableId, nameVariableId, valueVariableId, containerId){
@@ -66,6 +87,8 @@ class HandlerValue {
         }else{
             // створюємо елемент для вставки
             this.element = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputVariableType' value='"+this.typeVariable+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputVariableName' value='"+this.nameVariable+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputVariableValue' value='"+this.valueVariable+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>";
+            //
+            addOption(select, this.nameVariable, this.nameVariable, elementId);
             // записуємо значення в асоціативний масив
             if(this.valueVariable == "" || this.valueVariable === null) {
                 data.set(elementId,this.typeVariable+"_"+this.nameVariable+"_"+"\"\""+";\n");
@@ -107,7 +130,8 @@ class HandlerElement {
             alert("pls enter all fields");
         }else{
             // створюємо елемент для вставки
-            this.UIelement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputPIN' value='"+this.elementPin+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementType' value='"+this.typeElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementName' value='"+this.elementName+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>"
+            this.UIelement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputPIN' value='"+this.elementPin+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementType' value='"+this.typeElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementName' value='"+this.elementName+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>";
+            addOption(select, this.elementName, this.elementName, elementId);
             // записуємо значення в асоціативний масив
             elementsData.set(elementId,this.elementPin+"_"+this.typeElement+"_"+this.elementName+";\n");
             // вставляємо елемент в кінець контейнеру
