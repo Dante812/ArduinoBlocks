@@ -41,12 +41,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12 border">
+                    <h2 class="text-center">Void Setup</h2>
                     <!-- тут контейнер в якому будуть розміщатись створені змінні -->
                     <div class="col-md-12" id="containerForVariables"></div>
 
                     <!-- тут форма для створення змінних -->
                     <div class="row">
-
                         <!-- селектор -->
                         <div class="form-group col-md-3">
                             <select id="inputTypeVariable" class="form-control">
@@ -143,7 +143,46 @@
                                 
                             </select>
                         </div>
+                        <!-- поле для вибору частоти Serial.begin -->
+                        <div class="form-group form-inline col-md-4">
+                            <label class="mr-2" for="">Serial.begin = </label>
+                            <select id="serialBeginSelect" class="form-control">
+                                <option selected value="9600">9600</option>
+                                <option value="300">300</option>
+                                <option value="1200">1200</option>
+                                <option value="2400">2400</option>
+                                <option value="4800">4800</option>
+                                <option value="14400">14400</option>
+                                <option value="19200">19200</option>
+                                <option value="28800">28800</option>
+                                <option value="38400">38400</option>
+                                <option value="57600">57600</option>
+                                <option value="115200">115200</option>
+                            </select>
+                        </div>
 
+                    </div>
+                    <div class="row">
+                        <!-- форма для void loop -->
+                        <div class="col-md-12">
+                            <h2 class="text-center">Void Loop</h2>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <select id="inputAction" class="form-control">
+                                <option selected value="none">Choose action</option>
+                                <option value="Serial.println">Serial.println</option>
+                                <option value="delay">delay</option>
+                                <option value="digitalRead">digitalRead</option>
+                                <option value="digitalWrite">digitalWrite</option>
+                                <option value="analogRead">analogRead</option>
+                                <option value="analogWrite">analogWrite</option>
+                            </select>
+                        </div>
+                        <!-- кнопка додати -->
+                        <div class="form-group col-md-1">
+                            <button data-toggle="modal" data-target="#" class="btn btn-primary" onclick="showModalAction()">ADD</button>
+                        </div>
+                        <!-- кінець кнопки -->
                     </div>
                     
                     <!-- тут кнопка для генерування і відправлення коду на обробку -->
@@ -152,6 +191,7 @@
                             <form action="../../../cgi-bin/pro.pl " method="POST">
                                 <input type="hidden" name="variables" id="senderVariables" value="">
                                 <input type="hidden" name="elements" id="senderElements" value="">
+                                <input type="hidden" name="serialBegin" id="senderSerialBegin" value="">
                                 <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
                             </form>
                         </div>
@@ -163,9 +203,97 @@
                 </div>
             </div>
         </div>
+        <!-- модальні вікна -->
+
+        <!-- модальне вікно для команди Serial.println -->
+        <div class="modal fade" id="serialPrintlnModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                       <span>Serial.println</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label>Value</label>
+                                <select id="inputSerialValue" class="form-control"></select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="">Text</label>
+                                <input type="text" class="form-control form-control-sm" id="serialPrintln">
+                            </div>
+
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
+                        <button type="button" id="switchModalSave" onclick="addSerialPrintln()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- кінець одального вікна Serial.println -->
+
+        <!-- модальне вікно для команди delay -->
+        <div class="modal fade" id="delayModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+    
+                    <div class="modal-header">
+                       <span>delay</span>
+                    </div>
+    
+                    <div class="modal-body">   
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="number" class="form-control form-control-sm" id="delay">
+                        </div>
+    
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
+                        <button type="button" id="switchModalSave" onclick="addDelay()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- кінець модального вікна delay -->
+
+        <!-- модальне вікно для команди digitalRead -->
+        <div class="modal fade" id="digitalReadModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+    
+                    <div class="modal-header">
+                       <span>digitalRead</span>
+                    </div>
+    
+                    <div class="modal-body">   
+                        <form>
+                            <div class="form-row">
+
+                                <div class="col">
+                                    <label>Value</label>
+                                    <select id="inputDigitalReadValue" class="form-control"></select>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
+                        <button type="button" id="switchModalSave" onclick="addDigitalRead()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- кінець модального вікна digitalread -->
         <!-- підключення мого скріпта -->
         <script src="../js/class.js"></script>
-        <script src="../js/test.js"></script>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
