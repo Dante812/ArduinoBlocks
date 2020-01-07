@@ -288,7 +288,7 @@ class ElementsHandler {
         document.getElementById(id).remove();
     }
 }
-// чекаю патча від Ростіка бо хз що навіть в конструктор покласти
+// чекаю патча від Ростіка щоб доробити
 class ActionsHandler {
     constructor(visualContainerForActionId, inputActionId, inputSerialValueId, inputSerialTextId, inputDelayTextId, addButtonId, GlobalHandler){
         this.containerForAction = document.getElementById(visualContainerForActionId);
@@ -296,10 +296,10 @@ class ActionsHandler {
         this.inputSerialValue = document.getElementById(inputSerialValueId);
         this.inputSerialText = document.getElementById(inputSerialTextId);
         this.inputDelayText = document.getElementById(inputDelayTextId);
-        this.addButton = document.getElementById(addButtonId);
         this.addButtonId = addButtonId;
         this.globalHandler = GlobalHandler;
     }
+    // функція для виводу модальних вікон
     showModalAction() {
         switch(this.inputAction.value){
             case "none":
@@ -318,28 +318,31 @@ class ActionsHandler {
     }
 
     addSerialPrintln(){
+        // якщо користувач пише текст дані зберігаються сюди
         let serialPrintln = this.inputSerialText.value;
+        // якщо користувач виводить перемінну дані зберігаюсться сюди
         let serialData = this.inputSerialValue.value;
+        // змінна для збереження id елементу
         let elementId;
-        let deleteFunction = "";
+        // текст видалення для html елементу
+        let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+        // перевірка полів
+        // TODO треба перенести в окремий метод
         if ((serialData == "none") && (serialPrintln == "")) {
             alert("нічого не заповнено");
         } else if((serialData != "none") && (serialPrintln != "")){
             alert("заповнено два поля");
         }else if (serialData == "none") {
             // додавання функції
-            // добавляємо в хеш функцій
+            // додаємо функцію в хеш функцій
             elementId = this.globalHandler.addActionInList("Serial.println(\""+serialPrintln+"\");");
-            //
-            deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
             // створюємо візуальний елемент
             let actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+serialPrintln+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
             // додаєму візуальний елемент на сторінку
             this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
         }else{
+            // додаємо функцію в хеш функцій
             elementId = this.globalHandler.addActionInList("Serial.println("+serialData+");");
-            //
-            deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
             // створюємо візуальний елемент
             actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+serialData+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
             // додаємо візуальний елемент на сторінку
@@ -348,14 +351,19 @@ class ActionsHandler {
 
     }
     addDelay(){
+        // зчитуємо дані які ввів користувач
         let delay = this.inputDelayText.value;
+        // записуємо функцію в хеш функцій
         let elementId = this.globalHandler.addActionInList("delay("+delay+");");
-        let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+        // створюємо графічний елемент
         let actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+delay+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
+        // додаємо візуальний елемент на сторінку
         this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
     }
     deleteAction(id){
+        // видалємо подію з хешу подій
         this.globalHandler.deleteActionFromList(id);
+        // видаляємо візуальний елемент
         document.getElementById(id).remove();
     }
 }
@@ -365,19 +373,4 @@ let variablesHandler = new VariablesHandler("inputTypeVariable", "inputVariableN
 let elementsHandler = new ElementsHandler("inputPIN", "inputElementType", "inputElementName", "containerForElements", globalHandler);
 let actionsHandler = new ActionsHandler("actionsContainer", "inputAction", "inputSerialValue", "serialPrintln", "delay", "addActionButton", globalHandler);
 
-
-var actionElement = "";
-var action = "";
-
-
-
-
-function addDelay(){
-    let delay = document.getElementById("delay").value;
-    data.set(elementId, delay);
-    actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+action+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+delay+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>";
-    containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
-    elementId++;
-    console.log(data);
-}
 
