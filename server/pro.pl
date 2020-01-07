@@ -10,6 +10,9 @@ print "Content-type: text/html\n\n";
 # отримання даних від html сторінки
 my $variablesData = $my_cgi->param("variables");
 my $elementsData = $my_cgi->param("elements");
+my $serialBegin = $my_cgi->param("serialBegin");
+my $actions = $my_cgi->param("actions");
+# тестовий вивід
 # починаємо розбір даних
 
 #оголошуємо функцію для обробки змінних
@@ -57,10 +60,10 @@ sub variablesCreator {
 }
 # оголошуємо функцію для обробки елементів
 sub elementsCreator {
-    my ($text, $fast) = @_; 
+    my ($text) = @_; 
     chomp($text);
     # потрібно розбити дані на рядки по знаку ";"
-    my @elementsLines = split(/;/,$elementsData);
+    my @elementsLines = split(/;/,$text);
     # індекс
     my $index = 0;
     # масив готових елементів
@@ -92,27 +95,32 @@ sub elementsCreator {
     foreach my $line (@elements) {
         print($line."<br>");
     }
-    print("void setup(){"."<br>");
+    print("void setup(){");
     # задаємо швидкість спілкування Arduino з комп'ютером
-    print("<pre>    Serial.begin(".$fast.");</pre>");
+    print("<pre>    Serial.begin($serialBegin);</pre>");
     # записуємо всі pinMode
     for (my $i = 0; $i < $index; $i++) {
         print("<pre>    pinMode(".$elementsNames[$i].", ".$elementsPinModes[$i].");</pre>");
     }
     print("}"."<br>");
 }
+# функція для формування c++ коду функцій
+sub actionsCreator {
+    my ($text) = @_;
+    chomp($text);
+    my @actionsLines = split(/;/,$text);
+    # початок void loop
+    print("void loop(){");
+    foreach my $action (@actionsLines){
+        print("<pre>    $action;</pre>");
+    }
+    print("}");
+}
 
 # друкуємо void setup
 &variablesCreator($variablesData);
-&elementsCreator($elementsData, 9600);
-
-# початок void loop
-print("void loop(){"."<br>");
-
-# тут має бути все що всередені void setup
-
-# кінець void loop
-print("}"."<br>");
+&elementsCreator($elementsData);
+&actionsCreator($actions);
 
 
 

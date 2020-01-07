@@ -1,9 +1,9 @@
 // змінна для генерування ID елементів на сторінці
-var elementId = 0;
+let elementId = 0;
 // хеш для збереження перемінних для відправки на сервер
-var data = new Map();
+let data = new Map();
 // хеш для збереження елементів для відправки на сервер
-var elementsData = new Map();
+let elementsData = new Map();
 // масив для збереження імен змінних
 let names = new Map();
 // функція для відправлення даних на обрбку
@@ -147,6 +147,7 @@ class HandlerElement {
             names.set(this.elementName,"");
             // створюємо елемент для вставки
             this.UIelement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputPIN' value='"+this.elementPin+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementType' value='"+this.typeElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementName' value='"+this.elementName+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='deleteRow("+elementId+")'>DEL</button></div></div>";
+            // записуємо елемент в селектор вибору змінних
             addOption(select, this.elementName, this.elementName, elementId);
             addOption(select2, this.elementName, this.elementName, elementId+"a");
             // записуємо значення в асоціативний масив
@@ -208,7 +209,6 @@ function addSerialPrintln(){
     }else {
         console.log(action+"("+serialPrintln+");");
     }
-    
 }
 
 function addDelay(){

@@ -57,7 +57,6 @@
                                 <option value="float">FLOAT</option>
                                 <option value="double">DOUBLE</option>
                                 <option value="long">LONG</option>
-                                <option value="char">CHAR</option>
                             </select>
                         </div>
                         <!-- кінець селектору -->
@@ -76,7 +75,7 @@
 
                         <!-- кнопка додати -->
                         <div class="form-group col-md-1">
-                            <button class="btn btn-primary" onclick="handlerValue.addVariable()">ADD</button>
+                            <button class="btn btn-primary" onclick="variablesHandler.addVariable()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
                     </div>
@@ -133,16 +132,10 @@
 
                         <!-- кнопка додати -->
                         <div class="form-group col-md-1">
-                            <button class="btn btn-primary" onclick="handlerElement.addElement()">ADD</button>
+                            <button class="btn btn-primary" onclick="elementsHandler.addElement()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
 
-                        <!-- тут тестовий селектор -->
-                        <div class="form-group col-md-4">
-                            <select id="test" class="form-control">
-                                
-                            </select>
-                        </div>
                         <!-- поле для вибору частоти Serial.begin -->
                         <div class="form-group form-inline col-md-4">
                             <label class="mr-2" for="">Serial.begin = </label>
@@ -164,7 +157,7 @@
                     </div>
                     <div class="row">
                         <!-- форма для void loop -->
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="actionsContainer">
                             <h2 class="text-center">Void Loop</h2>
                         </div>
                         <div class="form-group col-md-11">
@@ -172,15 +165,12 @@
                                 <option selected value="none">Choose action</option>
                                 <option value="Serial.println">Serial.println</option>
                                 <option value="delay">delay</option>
-                                <option value="digitalRead">digitalRead</option>
                                 <option value="digitalWrite">digitalWrite</option>
-                                <option value="analogRead">analogRead</option>
-                                <option value="analogWrite">analogWrite</option>
                             </select>
                         </div>
                         <!-- кнопка додати -->
                         <div class="form-group col-md-1">
-                            <button data-toggle="modal" data-target="#" class="btn btn-primary" onclick="showModalAction()">ADD</button>
+                            <button data-toggle="modal" id="addActionButton" data-target="#" class="btn btn-primary" onclick="actionsHandler.showModalAction()">ADD</button>
                         </div>
                         <!-- кінець кнопки -->
                     </div>
@@ -191,8 +181,9 @@
                             <form action="../../../cgi-bin/pro.pl " method="POST">
                                 <input type="hidden" name="variables" id="senderVariables" value="">
                                 <input type="hidden" name="elements" id="senderElements" value="">
+                                <input type="hidden" name="actions" id="senderActions" value="">
                                 <input type="hidden" name="serialBegin" id="senderSerialBegin" value="">
-                                <button class="btn btn-success col-md-12" onclick="sendData()">GENNERATE</button>
+                                <button class="btn btn-success col-md-12" onclick="globalHandler.sendData()">GENNERATE</button>
                             </form>
                         </div>
                     </div>
@@ -216,7 +207,9 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label>Value</label>
-                                <select id="inputSerialValue" class="form-control"></select>
+                                <select id="inputSerialValue" class="form-control variablesSelect">
+                                    <option value="none">none</option>
+                                </select>
                             </div>
 
                             <div class="col-md-6">
@@ -228,8 +221,8 @@
                     </div>
     
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
-                        <button type="button" id="switchModalSave" onclick="addSerialPrintln()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Закрити</button>
+                        <button type="button" id="switchModalSave" onclick="actionsHandler.addSerialPrintln()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
                     </div>
                 </div>
             </div>
@@ -255,7 +248,7 @@
     
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
-                        <button type="button" id="switchModalSave" onclick="addDelay()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+                        <button type="button" id="switchModalSave" onclick="actionsHandler.addDelay()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
                     </div>
                 </div>
             </div>
@@ -277,7 +270,7 @@
 
                                 <div class="col">
                                     <label>Value</label>
-                                    <select id="inputDigitalReadValue" class="form-control"></select>
+                                    <select id="inputDigitalReadValue" class="form-control variablesSelect"></select>
                                 </div>
 
                             </div>
@@ -293,7 +286,7 @@
         </div>
         <!-- кінець модального вікна digitalread -->
         <!-- підключення мого скріпта -->
-        <script src="../js/class.js"></script>
+        <script src="../js/test.js"></script>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
