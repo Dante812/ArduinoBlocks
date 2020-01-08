@@ -83,20 +83,6 @@ class GlobalHandler {
             return true;
         }
     }
-    // функція яка замінює ім'я в хеші імен
-    // якщо дане ім'я існувало тоді воно заміняється
-    // і функція повертає false
-    // якщо не існувало тоді воно створюється і повертає true
-    replaceNameInList(name){
-        if(this.checkNameInList(name)){
-            this.deleteNameFromList(name);
-            this.addNameInList(name);
-            return false;
-        }else{
-            this.addNameInList(name);
-            return true;
-        }
-    }
     // функція для видалення імені з хешу імен
     deleteNameFromList(name){
         this.namesData.delete(name);
@@ -325,7 +311,8 @@ class ActionsHandler {
         // змінна для збереження id елементу
         let elementId;
         // текст видалення для html елементу
-        let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+        let deleteFunction;
+        let actionElement;
         // перевірка полів
         // TODO треба перенести в окремий метод
         if ((serialData == "none") && (serialPrintln == "")) {
@@ -336,6 +323,8 @@ class ActionsHandler {
             // додавання функції
             // додаємо функцію в хеш функцій
             elementId = this.globalHandler.addActionInList("Serial.println(\""+serialPrintln+"\");");
+            // текст видалення для html елементу
+            deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
             // створюємо візуальний елемент
             let actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+serialPrintln+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
             // додаєму візуальний елемент на сторінку
@@ -344,6 +333,8 @@ class ActionsHandler {
             // додаємо функцію в хеш функцій
             elementId = this.globalHandler.addActionInList("Serial.println("+serialData+");");
             // створюємо візуальний елемент
+            // текст видалення для html елементу
+            deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
             actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+serialData+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
             // додаємо візуальний елемент на сторінку
             this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
@@ -356,6 +347,8 @@ class ActionsHandler {
         // записуємо функцію в хеш функцій
         let elementId = this.globalHandler.addActionInList("delay("+delay+");");
         // створюємо графічний елемент
+        // текст видалення для html елементу
+        let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
         let actionElement = "<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='"+delay+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
         // додаємо візуальний елемент на сторінку
         this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
