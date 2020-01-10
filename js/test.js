@@ -427,10 +427,13 @@ class ActionsHandler {
    * @param {string} inputDelayTextId - id текстового поля в формі delay
    * @param {string} inputDigitalWriteValueId - id випадаючого списку з елементами в формі digitalWrite
    * @param {string} digitalStatusId - id випадаючого списку з станами в формі digitalWrite
+   * @param {string} digitalReadValueId - id випадаючого списку змінних в формі digitalRead
+   * @param {string} digitalReadComandId - id випадаючого списку з командами в формі digitalRead
+   * @param {string} digitalReadElementId  - id випадаючого списку елементів в формі digitalRead
    * @param {string} addButtonId - id кнопик додати функцію
    * @param {object} GlobalHandler - об'єкт GlobalHandler
    */
-  constructor(visualContainerForActionId, inputActionId, inputSerialValueId, inputSerialTextId, inputDelayTextId, inputDigitalWriteValueId, digitalStatusId, addButtonId, GlobalHandler){
+  constructor(visualContainerForActionId, inputActionId, inputSerialValueId, inputSerialTextId, inputDelayTextId, inputDigitalWriteValueId, digitalStatusId, digitalReadValueId, digitalReadComandId, digitalReadElementId, addButtonId, GlobalHandler){
     this.containerForAction = document.getElementById(visualContainerForActionId);
     this.inputAction = document.getElementById(inputActionId);
     this.inputSerialValue = document.getElementById(inputSerialValueId);
@@ -438,6 +441,9 @@ class ActionsHandler {
     this.inputDelayText = document.getElementById(inputDelayTextId);
     this.inputDigitalWriteValue = document.getElementById(inputDigitalWriteValueId);
     this.digitalStatus = document.getElementById(digitalStatusId);
+    this.digitalReadValue = document.getElementById(digitalReadValueId);
+    this.digitalReadComand = document.getElementById(digitalReadComandId);
+    this.digitalReadElement = document.getElementById(digitalReadElementId);
     this.addButtonId = addButtonId;
     this.globalHandler = GlobalHandler;
   }
@@ -460,9 +466,13 @@ class ActionsHandler {
         $('#'+this.addButtonId).attr('data-target','#delayModal');
         break;
 
-      case "digitalWrite":
-        $('#'+this.addButtonId).attr('data-target','#digitalWriteModal');
-        break;
+        case "digitalWrite":
+          $('#'+this.addButtonId).attr('data-target','#digitalWriteModal');
+          break;
+
+        case "digitalRead":
+          $('#'+this.addButtonId).attr('data-target','#digitalReadModal');
+          break;
     }
   }
   /**
@@ -536,6 +546,33 @@ class ActionsHandler {
     }
   }
   /**
+   * створюємо функцію digitalRead
+   */
+  addDigitalRead(){
+    let dReadValue = this.digitalReadValue.value;
+    let dReadComand = this.digitalReadComand.value;
+    let dReadElement = this.digitalReadElement.value;
+    if (dReadValue == "" || dReadComand == ""){
+      alert("заповніть поле куди слід записати дані");
+    } else if (dReadValue != "" || dReadComand != ""){
+      alert("виберіть одне поле");
+    } else if (dReadComand == "" || dReadElement !=""){
+      let elementId = this.globalHandler.addActionInList(dReadValue+" = digitalRead("+dReadElement+");");
+      let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+      let actionElement ="<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.dReadValue+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='digitalRead("+dReadElement+");'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
+      this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
+      // value = digitalRead(pin);
+    } else if (dReadElement != ""){
+      let elementId = this.globalHandler.addActionInList(dReadComand+"(digitalRead("+dReadElement+"));");
+      let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+      let actionElement ="<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.dReadComand+"'></div><div class='form-group col-md-7'><input disabled type='text' class='form-control' name='inputValue' value='digitalRead("+dReadElement+");'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
+      this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
+      // Serial.println(digitalRead(pin));
+    } else {
+      alert("виберіть змінну яку слід відстежувати");
+    }
+  }
+  /**
    * видаляємо функцію
    * 
    * @param {String} id - id функції 
@@ -551,6 +588,6 @@ class ActionsHandler {
 let globalHandler = new GlobalHandler("senderVariables", "senderElements", "senderActions", "senderSerialBegin", "variablesSelect", "elementsSelect");
 let variablesHandler = new VariablesHandler("inputTypeVariable", "inputVariableName", "inputVariableValue", "containerForVariables", globalHandler);
 let elementsHandler = new ElementsHandler("inputPIN", "inputElementType", "inputElementName", "containerForElements", globalHandler);
-let actionsHandler = new ActionsHandler("actionsContainer", "inputAction", "inputSerialValue", "serialPrintln", "delay", "inputDigitalWriteValue", "digitalStatus", "addActionButton", globalHandler);
+let actionsHandler = new ActionsHandler("actionsContainer", "inputAction", "inputSerialValue", "serialPrintln", "delay", "inputDigitalWriteValue", "digitalStatus", "digitalReadValue", "digitalReadComand", "digitalReadElement", "addActionButton", globalHandler);
 
 
