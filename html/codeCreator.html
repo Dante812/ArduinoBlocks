@@ -84,7 +84,7 @@
           <!-- тут буде контейнер для створення елементів -->
           <div class="col-md-12" id="containerForElements"></div>
 
-          <!-- тут буде форма для довавання елементів -->
+<!-- тут буде форма для довавання елементів -->
           <div class="row">
             <!-- селектор вибору піна -->
             <div class="form-group col-md-3">
@@ -166,6 +166,7 @@
                 <option value="Serial.println">Serial.println</option>
                 <option value="delay">delay</option>
                 <option value="digitalWrite">digitalWrite</option>
+                <option value="digitalRead">digitalRead</option>
               </select>
             </div>
             <!-- кнопка додати -->
@@ -200,14 +201,16 @@
     <div class="modal fade" id="serialPrintlnModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+
           <div class="modal-header">
             <span>Serial.println</span>
           </div>
+
           <div class="modal-body">
             <div class="form-row">
               <div class="col-md-6">
                 <label>Value</label>
-                <select id="inputSerialValue" class="form-control variablesSelect">
+                <select id="inputSerialValue" class="form-control variablesSelect elementsSelect">
                   <option value="none">none</option>
                 </select>
               </div>
@@ -216,7 +219,6 @@
                 <label for="">Text</label>
                 <input type="text" class="form-control form-control-sm" id="serialPrintln">
               </div>
-
             </div>
           </div>
   
@@ -247,7 +249,7 @@
           </div>
   
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Закрити</button>
             <button type="button" id="switchModalSave" onclick="actionsHandler.addDelay()" data-dismiss="modal" class="btn btn-success">Зберегти</button>
           </div>
         </div>
@@ -255,36 +257,82 @@
     </div>
     <!-- кінець модального вікна delay -->
 
+    <!-- модальне вікно для команди digitalWrite -->
+    <div class="modal fade" id="digitalWriteModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <span>digitalWrite</span>
+            </div>
+
+              <div class="modal-body">   
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Value</label>
+                    <select id="inputDigitalWriteValue" class="form-control elementsSelect">
+                    </select>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label>Voltage</label>
+                    <select id="digitalStatus" class="form-control">
+                      <option selected value="HIGH">HIGH</option>
+                      <option value="LOW">LOW</option>
+                    </select>
+                  </div>
+                </div> 
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Закрити</button>
+                <button type="button" id="switchModalSave" onclick="actionsHandler.addDigitalWrite()"  data-dismiss="modal" class="btn btn-success">Зберегти</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- кінець модального вікна digitalWrite -->
+
     <!-- модальне вікно для команди digitalRead -->
     <div class="modal fade" id="digitalReadModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-  
           <div class="modal-header">
             <span>digitalRead</span>
           </div>
-  
+          <!-- Тіло модального вікна -->
           <div class="modal-body">  
-            <form>
-              <div class="form-row">
+            <div class="col-md-6">
+              <span></span>
+              <!-- селектор змінних куди необхідно передати дані -->
+              <select id="digitalReadValue" class="form-control variablesSelect"></select>
+              <!-- кінець селектору -->
 
-                <div class="col">
-                  <label>Value</label>
-                  <select id="inputDigitalReadValue" class="form-control variablesSelect"></select>
-                </div>
+              <!-- селектор команд які працюватимуть із даними -->
+              <select id="digitalReadComand" class="form-control">
+                <option selected value="none">Choose action</option>
+                <option value="Serial.println">Serial.println</option>
+                <option value="digitalWrite">digitalWrite</option>
+              </select>
+              <!-- кінець селектору -->
+            </div>
 
-              </div>
-            </form>
+            <div class="col-md-6">
+              <!-- селектор елементів з яких ми беремо дані -->
+              <select id="digitalReadElement" class="form-control elementsSelect"></select>
+              <!-- кінець селектору -->
+            </div>
           </div>
-  
+          <!-- кінець тіла модального вікна -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Закрить</button>
-            <button type="button" id="switchModalSave" onclick="addDigitalRead()" data-dismiss="modal" class="btn btn-success">Зберегти</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Закрити</button>
+            <button type="button" id="switchModalSave" onclick="actionsHandler.addDigitalRead()" data-dismiss="modal" class="btn btn-success">Зберегти</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- кінець модального вікна digitalread -->
+    <!-- кінець модального вікна digitalRead -->
+
     <!-- підключення мого скріпта -->
     <script src="../js/test.js"></script>
     <!-- Optional JavaScript -->
@@ -294,6 +342,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
-

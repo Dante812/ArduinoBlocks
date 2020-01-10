@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Manual</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,50 +9,126 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-12">
-          <!-- тут буде верхнє меню -->
-          <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-            <!-- Logo -->
-            <a class="navbar-brand" href="index.html">Logo</a>
-            <!-- Links -->
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Головна</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="codeCreator.html">Створити скрипт</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="manual.html">Інструкція</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="comands.html">Команди</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="examples.html">Приклади</a>
-              </li>
-            </ul>
-          </nav>
-          <br>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <!-- тут буде верхнє меню -->
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="index.html">
+                        <img src="../Images/logo.png" weight="20" height="30">
+                    </a>
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Головна</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="codeCreator.html">Створити скрипт</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manual.html">Інструкція</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="comands.html">Команди</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="examples.html">Приклади</a>
+                        </li>
+                    </ul>
+                </nav>
+                <br>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <!-- заголовок -->
-          <h2 class="text-center">Arduino Blocks</h2>
-          <!-- початок опису -->
-          <p></p>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- заголовок -->
+                <h2 class="text-center">Arduino Blocks</h2>
+
+            </div>
+            <!-- початок опису -->
+            <div class="col-md-3 overflow-auto " style="height: 930px;">
+                <nav id="navbar-example3" class="navbar navbar-light bg-light">
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#item-1">1 Початок роботи з платформою</a>
+                        <a class="nav-link" href="#item-2">2 Основні поняття для створення скриптів </a>
+                        <a class="nav-link" href="#item-3">3 Правила розробки або "Як уникнути помилок"  </a>
+                        <a class="nav-link" href="#item-4">4 Що таке перемінна </a>
+                        <a class="nav-link" href="#item-5">5 Як створити перемінну </a>
+                        <a class="nav-link" href="#item-6">6 Що таке компоненнт</a>
+                        <a class="nav-link" href="#item-7">Як створити компоненнт</a>
+                    </nav>
+                </nav>
+            </div>
+            <div class="col-md-9 overflow-auto" style="height: 930px;" data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                <div class="col-md-9">
+                    <p>Наша платформа створена для того щоб збільшити швидкість розробки, підвищити зручність написання, виключити механічні помилки, дати змогу створювати свої маленькі проекти навіть без знання мови програмування, все що вам потрібно це
+                        розмістити послідовні команди які ви хочете щоб виконував ваш проект, а сам скрипт згенерує для вас програма наша ціль зробити створення Arduino проектів простою, швидкою та доступною, а також дати змогу новачкам вивчати лише те
+                        що їм цікаво без довгих вивчень програмування. Для створення власного проекту вам достатньо ознайомитись з базовими принципами роботи платформи ардуїно, і багато з них будуть описані нижче. цей невеличкий посібник спрямований не
+                        тільки на тих хто лише починає вивчати роботу з Arduino, але й на тих хто хоче працювати з нашою платформою, хоча вже знайомий з програмуванням</p>
+                    <h5 id="item-1">1 Початок роботи з платформою</h5>
+                    <p>як ви вже могли прочитати в вступі наша платформа створена для того щоб зробити процес створення коду швидким та простим, але виникиє питання «як?» на це питання ми спробуємо дати відповідь в цьому розділі отже ви відкрили платформу
+                        і перейшли на сторінку розробки що ви бачите? якісь випадаючі списки, поля для вводу кнопки і так далі, що з ними робити, куди натискати? і як вже отримати готовий код? відповідь на ці всі питання ви знайдете по ходу документації
+                        тому давайте по порядку для початку розглянемо інтерфейс сторінки створення коду адже це основна частина всієї платформи і більша частина розробки буде проводитись саме на ній. в самому верху ви бачите головне меню сайту думаю
+                        з ним все зрозуміло натискаєте на пункти меню і переходите на різні сторінки цікаве починається під ним ви бачите лінії елементів які закінчуються кнопкою «додати» а також в кінці сторінки велико зелену кнопку «згенерувати» це
+                        основні елементи розробки адже саме вони додають код в ваш проект і генерують його також в лініях є випадаючі списки та текстові поля для вводу вони створені для того щоб ви могли створювати змінні та елементи такі які ви хочете.
+                        ви можете вибрати будь який доступний тип змінної назвати її так як вам буде зручно та задати потрібне вам значення, або вибрати PIN до якого буде підключений елемент назначити тип його спілкування з комп’ютером та ім’я цього елементу
+                        і все це робить процес створення швидким, легким, та без помилковим, навіть якщо ви зробите помилку платформа попередить вас про неї</p>
+                    <h5 id="item-2">2 Основні поняття для створення скриптів </h5>
+                    <p>до основних понять які потрібно знати для створення скріптів в першу чергу потрібно віднести тип спілкування елементу з Arduino його є всього два типи INPUT та OUTPUT розберемо кожен з них INPUT це режим який дозволяє елементу відсилати
+                        якісь дані на Arduino наприклад, елемент «фоторезистор» він відправляє значення освітленості навколо нього на Arduino в вигляді числових значень від 0 до 1023, і для того щоб ми могли зчитати його значення нам потрібно буквально
+                        сказати нашій Arduino «цей елемент буде присилати нам дані» елементи які зчитують якісь дані з навколишнього середовища і передають їх Arduino називаються «датчики» або «аналізатори» адже вони індикують вбо іншими словами аналізують
+                        те що навколо них OUTPUT це режим прямо протилежний INPUT якщо в режимі INPUT елемент зчитував якусь інформації з навколишнього середовища і передавав її в Arduino то режим OUTPUT дає змогу керувати елементами, наприклад включити
+                        світлодіод, почати крутити мотор і так далі елементи які не аналізують навколишнє середовище а виконують команди називаються «виконавчими механізмами» отже, якщо підсумувати то будь який проект має мати в собі хочаб якісь елементи
+                        аналізатори або виконавчі пристрої або і ті і ті одночасно адже робот(самий яскравий приклад робототехніки) є сукупністю багатьох аналізаторів та виконавчих механізмів його очі (камери) є аналізаторами тобто елементами які працюють
+                        в режимі INPUT а його руки є виконавчими механізмами які рухаються за допомогою моторів які працюють в режимі OUTPUT і тільки їх комбінація, тобто виконанна якоїсь дії в залежності від того що робот бачить дає результат повної
+                        «автоматизації» дій можна сказати що ви «навчаєте робота реагувати на певні умови зовнішнього оточення» наприклад включити лампочку якщо в кімнаті темно це мабуть найпростіший приклад такої взаємодії вам уже не потрібно в ручну
+                        говорити роботу «Включи лампочку» він сам буде слідкувати за освітленням і включить її тоді коли це потрібно</p>
+                    <h4 id="item-3">3 Правила розробки</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta itaque eos cumque nesciunt, repellat quam qui obcaecati rerum, hic harum fugiat quidem id ad quas facilis aliquid, dolorem mollitia nam? Obcaecati consectetur alias,
+                        iusto sed nemo hic ratione eligendi facere voluptates sequi unde? Ut tempora, molestiae nulla suscipit animi nisi id. Consequuntur soluta asperiores iste praesentium ex! Velit, accusantium optio tempora iusto quae fuga ullam pariatur
+                        cum provident labore. Totam aspernatur laboriosam soluta dolorum pariatur! Praesentium illo voluptate enim totam suscipit odit mollitia eum unde saepe ab veritatis nulla perspiciatis, sunt omnis quos dolor iste perferendis quae
+                        temporibus asperiores! Voluptatem nisi dicta ea id tempore cumque illo! Vitae cupiditate fugiat unde ad voluptate? Consequatur tenetur deserunt quia quas illum vitae porro nostrum eum numquam reiciendis, corporis nobis ab molestias
+                        autem temporibus molestiae, consectetur mollitia. Cumque dicta quo quis rem, alias, magnam beatae ratione, perspiciatis provident atque quibusdam animi molestiae fugit harum officia optio enim repellat totam dolorem earum similique
+                        reiciendis quae? Soluta quasi, voluptate provident esse, debitis laboriosam, vel beatae molestiae iusto accusamus nisi reiciendis! Rerum beatae dicta sapiente numquam sequi ut voluptatibus, vero id at atque earum nobis corporis
+                        soluta aut harum nam laborum cumque, labore aliquam accusamus tempore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus minus placeat rem quo aperiam inventore dignissimos, nesciunt provident labore. Assumenda
+                        pariatur vitae ipsa aspernatur suscipit, tempore magni libero ex nam, temporibus provident hic error consequuntur omnis, numquam ratione perferendis quas. Temporibus delectus maxime, laboriosam officiis sed magni soluta non quos
+                        ipsa accusamus debitis dolor amet illo vitae? Optio molestiae perspiciatis molestias officiis tempore laudantium enim consectetur exercitationem veniam accusamus blanditiis recusandae asperiores, repudiandae porro beatae a inventore
+                        iste repellat labore, minima dolore. Ut provident deleniti natus, temporibus libero molestiae voluptatibus, totam facere quae amet asperiores ducimus repudiandae aliquam eos veniam!</p>
+                    <h4 id="item-4">4 Що таке перемінна</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, sit. Possimus quisquam consectetur qui nesciunt debitis eligendi. Voluptates assumenda quisquam ratione vero voluptatibus ex accusamus eveniet et a non ea enim placeat,
+                        laborum unde reiciendis voluptatem quis! Ad cumque maxime vitae ex vel iure placeat tempora, eos optio deserunt? Repellat voluptates debitis et. Repudiandae autem, porro, voluptas quisquam minus, qui excepturi odio sequi ea unde
+                        et reiciendis sed. Odio dolorem illo dolorum id qui ab itaque quas ut eaque, repudiandae alias unde asperiores, eveniet ea earum, voluptas commodi consectetur exercitationem dicta inventore voluptate maxime rem veritatis. Laborum
+                        corrupti maxime quidem!</p>
+                    <h5 id="item-5">5 Як створити перемінну</h5>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa cumque pariatur reprehenderit possimus aut provident quo ut suscipit atque, placeat blanditiis temporibus sit illo a quidem commodi nulla, facilis eos asperiores quas ex
+                        eaque? Recusandae delectus culpa reiciendis exercitationem libero magni, veritatis corporis praesentium minima fuga quisquam eveniet voluptate necessitatibus cupiditate aliquid inventore ipsa ullam nisi nihil, voluptatem in expedita
+                        earum porro! Repellendus fuga laboriosam voluptatum architecto porro totam omnis atque repellat, ratione sint tenetur quae inventore dolore voluptatem vel culpa aperiam rem at optio aspernatur eaque. Ad velit exercitationem atque
+                        sequi quae nam excepturi, blanditiis nemo, esse libero laborum.</p>
+                    <h5 id="item-6">6 Що таке компоненнт</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque vel possimus inventore quaerat voluptates quos, incidunt autem perferendis necessitatibus praesentium nam. Veritatis dolore numquam ipsum distinctio aliquam sapiente ipsam
+                        consequatur quisquam, atque recusandae ullam impedit quo fuga omnis minus fugiat reiciendis dicta, blanditiis error. Vel ex labore non quia cupiditate rerum dolorem a dolor, magnam tenetur ipsum autem enim sed. Deserunt ut, totam
+                        nam magni nostrum esse, unde impedit sapiente optio nesciunt asperiores odit necessitatibus eos omnis minus! Voluptas tenetur reiciendis odit similique perspiciatis repellat vero quasi eos minus ipsam vitae modi pariatur a ratione
+                        quae obcaecati, quas repudiandae! Aperiam?
+                    </p>
+                    <h5 id="item-7">Як створити компоненнт</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque vel possimus inventore quaerat voluptates quos, incidunt autem perferendis necessitatibus praesentium nam. Veritatis dolore numquam ipsum distinctio aliquam sapiente ipsam
+                        consequatur quisquam, atque recusandae ullam impedit quo fuga omnis minus fugiat reiciendis dicta, blanditiis error. Vel ex labore non quia cupiditate rerum dolorem a dolor, magnam tenetur ipsum autem enim sed. Deserunt ut, totam
+                        nam magni nostrum esse, unde impedit sapiente optio nesciunt asperiores odit necessitatibus eos omnis minus! Voluptas tenetur reiciendis odit similique perspiciatis repellat vero quasi eos minus ipsam vitae modi pariatur a ratione
+                        quae obcaecati, quas repudiandae! Aperiam?
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
+
 </html>

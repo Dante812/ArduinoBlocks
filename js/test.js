@@ -1,15 +1,23 @@
-// класс який відповідає за глобальні змінні
-// такі як id або масиви даних для відправки
-// а також методи такі як видалити елемент і тд
 class GlobalHandler {
-  // оголошоємо конструктор який приймає id схованих елементів форми для відправки
-  // значень на сервер та клас селекторів які в собі зберігають змінні
-  constructor(inputVariablesId, inputElementsId, inputActionsId, inputSerialBeginId, variablesSelectorClass){
+  /**
+   * конструктор класу для роботи з глобальними змінними
+   * та відправки даних на сервер
+   * 
+   * @param {string} inputVariablesId - id input елемента для передачі змінних
+   * @param {string} inputElementsId - id input елемента для передачі елементів
+   * @param {string} inputActionsId - id input елемента для передачі функцій
+   * @param {string} inputSerialBeginId - id input елемента для передачі швидкості спілкування
+   * @param {string} variablesSelectorClass - клас випадаючих списків для змінних
+   * @param {string} elementsSelectorClass - клас випадаючих списків для елементів
+   */
+  constructor(inputVariablesId, inputElementsId, inputActionsId, inputSerialBeginId, variablesSelectorClass, elementsSelectorClass){
     // отримуємо сховані input для відправки даних на сервер
     this.inputVariables = document.getElementById(inputVariablesId);
     this.inputElements = document.getElementById(inputElementsId);
     this.inputActions = document.getElementById(inputActionsId);
     this.inputSerialBegin = document.getElementById(inputSerialBeginId);
+    // знаходимо всі селектори в яких має відображатись список створених елементів
+    this.selectorsListElements = document.querySelectorAll("."+elementsSelectorClass);
     // знаходимо всі селектори в яких має відображатись список створених змінних
     this.selectorsList = document.querySelectorAll("."+variablesSelectorClass);
     // змінна для збереження id
@@ -25,46 +33,76 @@ class GlobalHandler {
     // змінна для збереження значення Serial.begin яке буде відправлене на сервер
     this.serialBegin = 0;
   }
-  // оголошуємо функції для роботи з даними
-
-  // функція для додавання змінної в хеш для змінних
-  // повертає id створеної змінної
+  /**
+   * додаємо змінну в загальний хеш змінних
+   * 
+   * @param {string} variableType - тип змінної
+   * @param {string} variableName - ім'я змінної
+   * @param {string} variableValue - значення змінної
+   * @returns {string}
+   */
   addVariableInList(variableType, variableName, variableValue){
     let id = this.elementId+"var";
     this.variablesData.set(id,variableType+"_"+variableName+"_"+variableValue+";");
     this.elementId++;
     return id;
   }
-  // функція для видалення змінної з хешу змінних
+  /**
+   * видаляємо змінну з хешу змінних
+   * 
+   * @param {string} variableId - id змінної
+   */
   deleteVariableFromList(variableId){
     this.variablesData.delete(variableId);
   }
-  // функція для додавання елементу в хеш елементів
-  // повертає id створеного елементу
+  /**
+   * додаємо елемент в хеш елементів
+   * 
+   * @param {string} elementPin - pin елементу
+   * @param {string} elementType - тип елементу
+   * @param {string} elementName - ім'я елементу
+   * @returns {string} 
+   */
   addElementInList(elementPin, elementType, elementName){
     let id = this.elementId+"elem";
     this.elementsData.set(id, elementPin+"_"+elementType+"_"+elementName+";");
     this.elementId++;
     return id;
   }
-  // функція для видалення елементу з хешу елементів
+  /**
+   * видаляємо елемент з хешу елементів
+   * 
+   * @param {string} elementId -id елементу
+   */
   deleteElementFromList(elementId){
     this.elementsData.delete(elementId);
   }
-  // функція для додавання команди в хеш команд
-  // повертає id створеної команди
+  /**
+   * додаємо функцію в хеш функцій
+   * 
+   * @param {string} action - функція
+   * @returns {string}
+   */
   addActionInList(action){
     let id = this.elementId+"act";
     this.actionsData.set(id, action);
     this.elementId++;
     return id;
   }
-  // функція для видалення команди з хешу команд
+  /**
+   * видаляємо функції з хешу функцій
+   * 
+   * @param {string} actionId - id функції
+   */
   deleteActionFromList(actionId){
     this.actionsData.delete(actionId);
   }
-  // функція для перевірки чи існує задане ім'я
-  // якщо існує поверне true якщо ні false
+  /**
+   * перевіряємо чи існує дане ім'я
+   * 
+   * @param {string} name - ім'я компоненту
+   * @returns {boolean} 
+   */
   checkNameInList(name){
     if(this.namesData.has(name)){
       return true;
@@ -72,9 +110,12 @@ class GlobalHandler {
       return false;
     }
   }
-  // функція для добавлення імені в хеш імен
-  // якщо таке ім'я існує функція повертає false 
-  // і нічого не додає в хеш імен
+  /**
+   * додаємо ім'я в хеш імен
+   * 
+   * @param {string} name - ім'я компоненту
+   * @returns {boolean} 
+   */
   addNameInList(name){
     if(this.checkNameInList(name)){
       return false;
@@ -83,22 +124,49 @@ class GlobalHandler {
       return true;
     }
   }
-  // функція для видалення імені з хешу імен
+  /**
+   * видаляємо ім'я з хешу імен
+   * 
+   * @param {string} name - ім'я компоненту
+   */
   deleteNameFromList(name){
     this.namesData.delete(name);
   }
-  // функція для добавлення значення в селектор
+  /**
+   * додаємо змінну в випадаючий список
+   * 
+   * @param {string} value - ім'я змінної
+   * @param {string} id - id змінної
+   */
   addValueInSelector(value, id){
-    // формуємо унікальний id для кожного елементу кожного селектору
     let selectNumber = 0;
     id += "selector" + selectNumber;
     this.selectorsList.forEach(function(selector) {
+    let option = selector.options[selector.options.length] = new Option(value, value);
+      option.id = id;
+      selectNumber++;
+    });
+  }
+  /**
+   * додаємо елемент в випадаючий список
+   * 
+   * @param {string} value - ім'я елементу
+   * @param {string} id - id елементу
+   */
+  addElementInSelector(value, id){
+    let selectNumber = 0;
+    id += "elementSelector" + selectNumber;
+    this.selectorsListElements.forEach(function(selector){
       let option = selector.options[selector.options.length] = new Option(value, value);
       option.id = id;
       selectNumber++;
     });
   }
-  // функція для видалення значення з селектору
+  /**
+   * видаляємо змінну з випадаючого списку
+   * 
+   * @param {string} id - id змінної
+   */
   deleteValueFromSelector(id){
     let selectNumber = 0;
     id += "selector" + selectNumber;
@@ -107,13 +175,30 @@ class GlobalHandler {
       selectNumber++;
     });
   }
-  // функція для створення Serial.begin
-  // ПЕРЕРОБИТИ!!!
+  /**
+   * видаляємо елемент з випадаючого списку
+   * 
+   * @param {string} id - id елементу
+   */
+  deleteElementFromSelector(id){
+    let selectNumber = 0;
+    id += "elementSelector" + selectNumber;
+    this.selectorsListElements.forEach(function(selector){
+      document.getElementById(id).remove();
+      selectNumber++;
+    });
+  }
+  /**
+   * зчитуємо значення Serial.begin
+   */
   createSerialBegin(){
     this.serialBegin = document.getElementById("serialBeginSelect").value;
   }
-  // функція для створення тексту змінних який буде відправлено на сервер
-  // повертає готовий рядок з змінних які знаходяться в хеші
+  /**
+   * генеруємо список змінних для відправлення на сервер
+   * 
+   * @returns {string}
+   */
   createVariablesText(){
     let variablesText = "";
     this.variablesData.forEach(function(element){
@@ -121,8 +206,11 @@ class GlobalHandler {
     });
     return variablesText;
   }
-  // функція для створення тексту елементів який буде відправлено на сервер
-  // повертає готовий рядок з елементів які знаходяться в хеші
+  /**
+   * генеруємо список елементів для відправлення на сервер
+   * 
+   * @returns {string}
+   */
   createElementsText(){
     let elementsText = "";
     this.elementsData.forEach(function(element){
@@ -130,8 +218,11 @@ class GlobalHandler {
     });
     return elementsText;
   }
-  // функція для створення тексту функцій який буде відправлено на сервер
-  // повертає готовий рядок з функцій які знаходяться в хеші
+  /**
+   * генеруємо список функцій для відправлення на сервер
+   * 
+   * @returns {string}
+   */
   createActionsText(){
     let actionsText = "";
     this.actionsData.forEach(function(element){
@@ -139,12 +230,18 @@ class GlobalHandler {
     });
     return actionsText;
   }
-  // функція для отримання Serial.begin
+  /**
+   * беремо Serial.begin для відправлення на сервер
+   * 
+   * @returns {string}
+   */
   getSerialBegin(){
     this.createSerialBegin();
     return this.serialBegin;
   }
-  // функція для відправки даних
+  /**
+   * відправляємо дані на сервер
+   */
   sendData(){
     this.inputVariables.value = this.createVariablesText();
     this.inputElements.value = this.createElementsText();
@@ -154,6 +251,15 @@ class GlobalHandler {
 }
 // класс для обробки змінних
 class VariablesHandler {
+  /**
+   * конструктор класу для проведення дій над змінними
+   * 
+   * @param {string} inputTypeVariableId - id input елемента форми для створення змінних (тип змінної)
+   * @param {string} inputNameVariableId - id input елемента форми для створення змінних (ім'я змінної)
+   * @param {string} inputValueVariableId - id input елемента форми для створення змінних (значення змінної)
+   * @param {string} visualContainerForVariablesId - id контейнера для відображення змінних
+   * @param {object} GlobalHandler - об`єкт GlobalHandler
+   */
   constructor(inputTypeVariableId, inputNameVariableId, inputValueVariableId, visualContainerForVariablesId, GlobalHandler){
     this.inputTypeVariable = document.getElementById(inputTypeVariableId);
     this.inputNameVariable = document.getElementById(inputNameVariableId);
@@ -161,9 +267,13 @@ class VariablesHandler {
     this.containerForVariables = document.getElementById(visualContainerForVariablesId);
     this.globalHandler = GlobalHandler;
   }
-  // функція для перевірки чи не пусті поля для вводу
-  // якщо пусте хочаб одне з них повертає false
-  // якщо всі поля заповнені повертає true
+  /**
+   * перевіряємо поля вводу
+   * 
+   * @param {string} typeVariable - тип змінної
+   * @param {string} nameVariable - ім'я змінної
+   * @returns {boolean}
+   */
   checkFields(typeVariable, nameVariable){
     if(typeVariable == "nonType" || nameVariable == ""){
       return false;
@@ -171,7 +281,9 @@ class VariablesHandler {
       return true;
     }
   }
-  // функція для створення змінної
+  /**
+   * створюємо змінну
+   */
   addVariable(){
     // id створеної змінної
     let idVariable;
@@ -200,14 +312,17 @@ class VariablesHandler {
         return idVariable;
       }else{
         alert("EQ names");
-      }
-       
+      } 
     }else{
       alert("fields problem");
     }
   }
-  // ТУТ КРИВО
-  // TODO переробити функцію deleteNameForList так щоб вона приймала id
+  /**
+   * видаляємо змінну
+   * 
+   * @param {string} id - id змінної
+   * @param {string} name - ім'я змінної
+   */
   deleteVariable(id, name){
     // видаляємо змінну з хешу змінних
     this.globalHandler.deleteVariableFromList(id);
@@ -220,6 +335,15 @@ class VariablesHandler {
   }
 }
 class ElementsHandler {
+  /**
+   * конструктор класу для проведення дій над елементами
+   * 
+   * @param {string} inputPinElementId - id input елемента форми для створення елементів (пін елементу)
+   * @param {string} inputTypeElementId - id input елемента форми для створення елементів (тип елементу)
+   * @param {string} inputNameElementId - id input елемента форми для створення елементів (ім'я елементу)
+   * @param {string} visualContainerForElementsId - id контейнера для відображення елементів
+   * @param {object} GlobalHandler - об'єкт GlobalHandler
+   */
   constructor(inputPinElementId, inputTypeElementId, inputNameElementId, visualContainerForElementsId, GlobalHandler){
     this.inputPinElement = document.getElementById(inputPinElementId);
     this.inputTypeElement = document.getElementById(inputTypeElementId);
@@ -227,6 +351,14 @@ class ElementsHandler {
     this.containerForElements = document.getElementById(visualContainerForElementsId);
     this.globalHandler = GlobalHandler;
   }
+  /**
+   * перевіряємо поля вводу
+   * 
+   * @param {string} pinElement - пін елементу
+   * @param {string} typeElement - тип елементу
+   * @param {string} nameElement - ім'я елементу
+   * @returns {boolean} 
+   */
   checkFields(pinElement, typeElement, nameElement){
     if(pinElement == "nonPin" || typeElement == "nonType" || nameElement == ""){
       return false;
@@ -234,6 +366,9 @@ class ElementsHandler {
       return true;
     }
   }
+  /**
+   * створюємо елемент
+   */
   addElement(){
     // id створеного елемента
     let idElement;
@@ -249,6 +384,8 @@ class ElementsHandler {
         // ТУТ КРИВО
         // створюємо текст який буде відповідати за видалення
         let deleteFunction = "elementsHandler.deleteElement(\""+idElement+"\", \""+nameElement+"\")";
+        // добавляємо елемент в селектор
+        this.globalHandler.addElementInSelector(nameElement, idElement);
         // ТУТ КРИВО
         // створюємо візуальний елемент
         let UIelement = "<div class='row' id='"+idElement+"'><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputPIN' value='"+pinElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementType' value='"+typeElement+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputElementName' value='"+nameElement+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
@@ -264,7 +401,12 @@ class ElementsHandler {
       alert("fields problem");
     }
   }
-  // ТУТ КРИВО
+  /**
+   * видаляємо елемент
+   * 
+   * @param {string} id - id елементу 
+   * @param {string} name - ім'я елементу
+   */
   deleteElement(id, name){
     // видаляємо елемент з хешу елементів
     this.globalHandler.deleteElementFromList(id);
@@ -274,18 +416,35 @@ class ElementsHandler {
     document.getElementById(id).remove();
   }
 }
-// чекаю патча від Ростіка щоб доробити
 class ActionsHandler {
-  constructor(visualContainerForActionId, inputActionId, inputSerialValueId, inputSerialTextId, inputDelayTextId, addButtonId, GlobalHandler){
+  /**
+   * конструктор класу для проведення дій над функціями 
+   * 
+   * @param {string} visualContainerForActionId - id контейнеру для відображення функцій
+   * @param {string} inputActionId - id випадаючого списку можливий функцій
+   * @param {string} inputSerialValueId - id випадаючого списку в формі Serial.println
+   * @param {string} inputSerialTextId - id текстового поля в формі Serial.println
+   * @param {string} inputDelayTextId - id текстового поля в формі delay
+   * @param {string} inputDigitalWriteValueId - id випадаючого списку з елементами в формі digitalWrite
+   * @param {string} digitalStatusId - id випадаючого списку з станами в формі digitalWrite
+   * @param {string} addButtonId - id кнопик додати функцію
+   * @param {object} GlobalHandler - об'єкт GlobalHandler
+   */
+  constructor(visualContainerForActionId, inputActionId, inputSerialValueId, inputSerialTextId, inputDelayTextId, inputDigitalWriteValueId, digitalStatusId, addButtonId, GlobalHandler){
     this.containerForAction = document.getElementById(visualContainerForActionId);
     this.inputAction = document.getElementById(inputActionId);
     this.inputSerialValue = document.getElementById(inputSerialValueId);
     this.inputSerialText = document.getElementById(inputSerialTextId);
     this.inputDelayText = document.getElementById(inputDelayTextId);
+    this.inputDigitalWriteValue = document.getElementById(inputDigitalWriteValueId);
+    this.digitalStatus = document.getElementById(digitalStatusId);
     this.addButtonId = addButtonId;
     this.globalHandler = GlobalHandler;
   }
   // функція для виводу модальних вікон
+  /**
+   * показуємо модальне вікно
+   */
   showModalAction() {
     switch(this.inputAction.value){
       case "none":
@@ -300,9 +459,15 @@ class ActionsHandler {
       case "delay":
         $('#'+this.addButtonId).attr('data-target','#delayModal');
         break;
+
+      case "digitalWrite":
+        $('#'+this.addButtonId).attr('data-target','#digitalWriteModal');
+        break;
     }
   }
-
+  /**
+   * створюємо функцію Serial.println
+   */
   addSerialPrintln(){
     // якщо користувач пише текст дані зберігаються сюди
     let serialPrintln = this.inputSerialText.value;
@@ -339,8 +504,10 @@ class ActionsHandler {
       // додаємо візуальний елемент на сторінку
       this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
     }
-
   }
+  /**
+   * створюємо функцію delay
+   */
   addDelay(){
     // зчитуємо дані які ввів користувач
     let delay = this.inputDelayText.value;
@@ -353,6 +520,26 @@ class ActionsHandler {
     // додаємо візуальний елемент на сторінку
     this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
   }
+  /**
+   * створюємо функцію digitalWrite
+   */
+  addDigitalWrite(){
+    let digitalWrite = this.inputDigitalWriteValue.value;
+    let status = this.digitalStatus.value;
+    if (digitalWrite == ""){
+      alert("Введіть ім'я піна");
+    } else {
+      let elementId = this.globalHandler.addActionInList("digitalWrite("+digitalWrite+", "+status+");");
+      let deleteFunction = "actionsHandler.deleteAction(\""+elementId+"\")";
+      let actionElement ="<div class='row' id='"+elementId+"'><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputAction' value='"+this.inputAction.value+"'></div><div class='form-group col-md-4'><input disabled type='text' class='form-control' name='inputValue' value='"+digitalWrite+"'></div><div class='form-group col-md-3'><input disabled type='text' class='form-control' name='inputStatus' value='"+status+"'></div><div class='form-group col-md-1'><button class='btn btn-danger' onclick='"+deleteFunction+"'>DEL</button></div></div>";
+      this.containerForAction.insertAdjacentHTML("beforeEnd", actionElement);
+    }
+  }
+  /**
+   * видаляємо функцію
+   * 
+   * @param {String} id - id функції 
+   */
   deleteAction(id){
     // видалємо подію з хешу подій
     this.globalHandler.deleteActionFromList(id);
@@ -361,9 +548,9 @@ class ActionsHandler {
   }
 }
 
-let globalHandler = new GlobalHandler("senderVariables", "senderElements", "senderActions", "senderSerialBegin", "variablesSelect");
+let globalHandler = new GlobalHandler("senderVariables", "senderElements", "senderActions", "senderSerialBegin", "variablesSelect", "elementsSelect");
 let variablesHandler = new VariablesHandler("inputTypeVariable", "inputVariableName", "inputVariableValue", "containerForVariables", globalHandler);
 let elementsHandler = new ElementsHandler("inputPIN", "inputElementType", "inputElementName", "containerForElements", globalHandler);
-let actionsHandler = new ActionsHandler("actionsContainer", "inputAction", "inputSerialValue", "serialPrintln", "delay", "addActionButton", globalHandler);
+let actionsHandler = new ActionsHandler("actionsContainer", "inputAction", "inputSerialValue", "serialPrintln", "delay", "inputDigitalWriteValue", "digitalStatus", "addActionButton", globalHandler);
 
 

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Comands</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,47 +9,97 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-12">
-          <!-- тут буде верхнє меню -->
-          <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-            <!-- Logo -->
-            <a class="navbar-brand" href="index.html">Logo</a>
-            <!-- Links -->
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Головна</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="codeCreator.html">Створити скрипт</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="manual.html">Інструкція</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="comands.html">Команди</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="examples.html">Приклади</a>
-              </li>
-            </ul>
-          </nav>
-          <br>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <!-- тут буде верхнє меню -->
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="index.html">
+                        <img src="../Images/logo.png" weight="20" height="30">
+                    </a>
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Головна</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="codeCreator.html">Створити скрипт</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manual.html">Інструкція</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="comands.html">Команди</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="examples.html">Приклади</a>
+                        </li>
+                    </ul>
+                </nav>
+                <br>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Comands</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Comands</h2>
+            </div>
         </div>
-      </div>
+        <div class="row">
+            <!-- початок опису -->
+            <div class="col-md-3 overflow-auto " style="height: 930px;">
+                <nav id="navbar-example3" class="navbar navbar-light bg-light">
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#item-1">Serial.begin();</a>
+                        <a class="nav-link" href="#item-2">Serial.println();</a>
+                        <a class="nav-link" href="#item-3">delay();</a>
+                        <a class="nav-link" href="#item-4">digitalRead(pin)</a>
+                        <a class="nav-link" href="#item-5">digitalWrite(pin, value);</a>
+                        <a class="nav-link" href="#item-6">analogRead(pin);</a>
+                        <a class="nav-link" href="#item-7">abalogWrite(pin, value);</a>
+
+                    </nav>
+                </nav>
+            </div>
+            <div class="col-md-9 overflow-auto" style="height: 930px;" data-spy="scroll" data-target="#navbar-example3" data-offset="0">
+                <div class="col-md-9">
+                    <h5 id="item-1">Serial.println()</h5>
+                    <p>Дана команда відповідає за підключення Serial-порта для спілкування з платою. В дужках передається швидкість з якою буде спілкуватись плата з комп'ютером. Необхідно добавити дану команду в Setup із значеннями: none!, 300, 1200, 2400,
+                        4800, 9600!, 19200, 38400, 57600, 115200, 230400, 250000, 500000, 1000000, 2000000. Значення 9600 і 115200 - частовикористовавуні. Значення none стоятиме по стандарту і означатиме, що Serial.begin в коді не знадобиться.
+                    </p>
+                    <h5 id="item-2">Serial.println();</h5>
+                    <p>Команда відповідає за "передачу" даних в нашу "консоль" arduino. Можна передавати як змінні, так і команди або текст. Щоб передати текст необхідно записати його в лапки "Text". Команда часто використовується для "відстеження" різних
+                        змінних, і значень давачів. Можно використовувати для передачі даних на відстань через додатково підключені модулі. Команду слід додати в Loop.
+                    </p>
+                    <h5 id="item-3">delay();</h5>
+                    <p>Команда відповідає за “затримку” в коді, і є життєво необхідною в багатьох випадках. В дужках ми передаєм час в мілісекундах. 1000 - одна секунда. Команду слід додати в Loop.
+                    </p>
+                    <h4 id="item-4">digitalRead(pin);</h4>
+                    <p>Команда “переглядає” значення цифрового піна і повертає 1 або 0. Команду слід передавати в змінну, де вона буде “зберігатись”. Команду слід додати в Loop.
+                    </p>
+                    <h4 id="item-5">digitalWrite(pin, value)</h4>
+                    <p>Команда передає на цифровий пін(pin) значення True(1) або False(0). Команда необхідна для включення/виключення живлення на цифровому піні. Команду слід додати в Loop
+                    </p>
+                    <h5 id="item-6">analogRead(pin);</h5>
+                    <p>Команда “переглядає” значення аналогового піна і повертає значення в межах 0 -1023(0 - 5V). Команду слід передавати в змінну, де вона буде “зберігатись”. Команду слід додати в Loop.
+                    </p>
+                    <h5 id="item-7">analogWrite(pin, value);</h5>
+                    <p>Команда передає на аналоговий пін(pin) значення в межах 0 - 1023(0 - 5V). Команда необхідна для подачі конкретної сили струму на цифровому піні, який підтримує широко-імпульсну модуляцію(ШІМ): 3, 5, 6, 9,10, 11. Команду слід додати
+                        в Loop.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+</body>
+
 </html>
